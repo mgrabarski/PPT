@@ -8,14 +8,14 @@ import mateusz.grabarski.businesslogiclayer.utils.listeners.DataManagerListener;
 import mateusz.grabarski.businesslogiclayer.utils.listeners.OnHTTPRequestComplete;
 
 /**
- * Created by Mateusz Grabarski on 13.09.2017.
+ * Created by Mateusz Grabarski on 15.09.2017.
  */
 
-public class NewsManager {
+public class StandingsManager {
 
     private Context context;
 
-    public NewsManager(Context context) {
+    public StandingsManager(Context context) {
         this.context = context;
     }
 
@@ -24,7 +24,7 @@ public class NewsManager {
             @Override
             public void onTaskCompleted(String xml) {
 
-                SharedPreferenceManager.saveNewsXML(context, xml);
+                SharedPreferenceManager.saveStandingsXML(context, xml);
 
                 listener.onFinishDownloadData(true);
             }
@@ -33,6 +33,6 @@ public class NewsManager {
             public void onTaskFailed() {
                 listener.onFinishDownloadData(false);
             }
-        }).execute(Constants.NEWS_URL);
+        }).execute(Constants.STANDINGS_URL);
     }
 }
