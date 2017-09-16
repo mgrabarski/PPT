@@ -172,41 +172,16 @@ public class NewsHandler {
                         item.setCategory(value);
                         break;
                     case KEY_ENCLOSURE:
-                        item.setEnclosure(parseEnclosure(child.getChildNodes()));
+                        Enclosure enclosure = new Enclosure();
+                        enclosure.setLength(child.getAttribute(KEY_ENCLOSURE_LENGTH));
+                        enclosure.setUrl(child.getAttribute(KEY_ENCLOSURE_URL));
+                        enclosure.setType(child.getAttribute(KEY_ENCLOSURE_TYPE));
+                        item.setEnclosure(enclosure);
                         break;
                 }
             }
         }
 
         return item;
-    }
-
-    private static Enclosure parseEnclosure(NodeList nodes) {
-        Enclosure enclosure = new Enclosure();
-
-        for (int i = 0; i < nodes.getLength(); i++) {
-            Node node = nodes.item(i);
-
-            if (node instanceof Element) {
-
-                Element child = (Element) node;
-                String name = child.getNodeName();
-                String value = child.getTextContent();
-
-                switch (name) {
-                    case KEY_ENCLOSURE_LENGTH:
-                        enclosure.setLength(value);
-                        break;
-                    case KEY_ENCLOSURE_URL:
-                        enclosure.setUrl(value);
-                        break;
-                    case KEY_ENCLOSURE_TYPE:
-                        enclosure.setType(value);
-                        break;
-                }
-            }
-        }
-
-        return enclosure;
     }
 }
