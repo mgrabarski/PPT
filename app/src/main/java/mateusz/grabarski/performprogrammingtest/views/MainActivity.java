@@ -1,18 +1,21 @@
 package mateusz.grabarski.performprogrammingtest.views;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
+import mateusz.grabarski.businesslogiclayer.models.news.Item;
 import mateusz.grabarski.performprogrammingtest.R;
 import mateusz.grabarski.performprogrammingtest.views.fragments.news.NewsFragment;
 import mateusz.grabarski.performprogrammingtest.views.fragments.scores.ScoresFragment;
 import mateusz.grabarski.performprogrammingtest.views.fragments.standings.StandingsFragment;
 import mateusz.grabarski.performprogrammingtest.widgets.DropDownMenu;
 
-public class MainActivity extends AppCompatActivity implements DropDownMenu.DropDownMenuListener {
+public class MainActivity extends AppCompatActivity implements
+        DropDownMenu.DropDownMenuListener, NewsFragment.NewsFragmentInterface {
 
     private DropDownMenu dropDownMenu;
 
@@ -63,5 +66,12 @@ public class MainActivity extends AppCompatActivity implements DropDownMenu.Drop
             fragmentTransaction.addToBackStack(tag);
             fragmentTransaction.commit();
         }
+    }
+
+    @Override
+    public void onNewsItemClick(Item item) {
+        Intent intent = new Intent(this, NewsDetailsActivity.class);
+        intent.putExtra(NewsDetailsActivity.NEWS_URL, item.getLink());
+        startActivity(intent);
     }
 }

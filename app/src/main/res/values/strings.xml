@@ -3,4 +3,5 @@
     <string name="news">News</string>
     <string name="scores">Scores</string>
     <string name="standings">Standings</string>
+    <string name="no_data_for_display">No data for display</string>
 </resources>

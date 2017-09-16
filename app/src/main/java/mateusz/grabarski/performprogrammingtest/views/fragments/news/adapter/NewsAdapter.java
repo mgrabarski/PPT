@@ -19,6 +19,7 @@ import java.util.List;
 import mateusz.grabarski.businesslogiclayer.models.news.Item;
 import mateusz.grabarski.performprogrammingtest.R;
 import mateusz.grabarski.performprogrammingtest.utils.DateUtils;
+import mateusz.grabarski.performprogrammingtest.views.fragments.news.adapter.listeners.OnNewsClickListener;
 
 /**
  * Created by Mateusz Grabarski on 15.09.2017.
@@ -28,10 +29,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     private List<Item> items;
     private Context context;
+    private OnNewsClickListener listener;
 
-    public NewsAdapter(Context context, List<Item> items) {
+    public NewsAdapter(Context context, List<Item> items, OnNewsClickListener listener) {
         this.context = context;
         this.items = items;
+        this.listener = listener;
     }
 
     @Override
@@ -67,7 +70,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             dateTv = itemView.findViewById(R.id.item_news_date_tv);
         }
 
-        public void populate(Item item) {
+        public void populate(final Item item) {
             titleTv.setText(item.getTitle());
             dateTv.setText(DateUtils.newsDateFormat().format(new Date()));
 
@@ -81,6 +84,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 public void onError() {
                     progressBar.setVisibility(View.GONE);
                     photoIv.setImageResource(R.mipmap.ic_launcher);
+                }
+            });
+
+            rootLl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null)
+                        listener.onNewsItemClick(item);
                 }
             });
         }
