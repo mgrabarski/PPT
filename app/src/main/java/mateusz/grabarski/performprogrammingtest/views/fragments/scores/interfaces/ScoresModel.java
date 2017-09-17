@@ -1,5 +1,6 @@
 package mateusz.grabarski.performprogrammingtest.views.fragments.scores.interfaces;
 
+import java.text.ParseException;
 import java.util.List;
 
 import mateusz.grabarski.businesslogiclayer.models.Scores;
@@ -13,4 +14,6 @@ public interface ScoresModel {
     void setScores(Scores scores);
     Scores getScores();
     List<Match> getMatchesList();
+    String getDate() throws ParseException;
+    void downloadNewData();
 }

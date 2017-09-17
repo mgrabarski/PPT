@@ -75,6 +75,13 @@ public class ScoresFragment extends Fragment implements ScoresView {
         matchesRv.setLayoutManager(new LinearLayoutManager(getContext()));
         matchesRv.setAdapter(adapter);
         scoresPresenter.displayMatches();
+        scoresPresenter.startRefreshData();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        scoresPresenter.stopRefreshData();
     }
 
     @Override

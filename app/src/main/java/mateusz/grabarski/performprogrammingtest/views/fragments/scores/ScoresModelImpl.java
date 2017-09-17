@@ -1,8 +1,12 @@
 package mateusz.grabarski.performprogrammingtest.views.fragments.scores;
 
 import android.content.Context;
+import android.util.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import mateusz.grabarski.businesslogiclayer.handlers.ScoresHandler;
@@ -10,6 +14,7 @@ import mateusz.grabarski.businesslogiclayer.managers.SharedPreferenceManager;
 import mateusz.grabarski.businesslogiclayer.models.Scores;
 import mateusz.grabarski.businesslogiclayer.models.scores.Group;
 import mateusz.grabarski.businesslogiclayer.models.scores.Match;
+import mateusz.grabarski.businesslogiclayer.models.scores.Parameter;
 import mateusz.grabarski.performprogrammingtest.views.fragments.scores.interfaces.ScoresModel;
 
 /**
@@ -46,5 +51,22 @@ public class ScoresModelImpl implements ScoresModel {
             matches.addAll(group.getMatch());
 
         return matches;
+    }
+
+    @Override
+    public String getDate() throws ParseException {
+        String date = getScores().getGsmrs().getMethod().getParameterByName(Parameter.PARAMETER_DATE);
+
+        SimpleDateFormat currentFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateFromModel = currentFormat.parse(date);
+
+        SimpleDateFormat displayFormat = new SimpleDateFormat("dd MMMM yyyy");
+
+        return displayFormat.format(dateFromModel);
+    }
+
+    @Override
+    public void downloadNewData() {
+        Log.d(ScoresModelImpl.class.getSimpleName(), "downloadNewData()");
     }
 }

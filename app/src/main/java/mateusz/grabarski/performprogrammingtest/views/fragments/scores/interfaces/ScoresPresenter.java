@@ -10,4 +10,6 @@ public interface ScoresPresenter {
     void setScoresView(ScoresView scoresView);
     ScoresView getScoresView();
     void displayMatches();
+    void startRefreshData();
+    void stopRefreshData();
 }
