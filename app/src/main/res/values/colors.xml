@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="windowBackground">#3C3C3C</color>
+
+    <color name="md_color_grey_800">#424242</color>
 </resources>
