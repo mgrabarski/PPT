@@ -1,7 +1,6 @@
 package mateusz.grabarski.performprogrammingtest.views.fragments.scores;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,12 +9,15 @@ import java.util.Date;
 import java.util.List;
 
 import mateusz.grabarski.businesslogiclayer.handlers.ScoresHandler;
+import mateusz.grabarski.businesslogiclayer.managers.ScoresManager;
 import mateusz.grabarski.businesslogiclayer.managers.SharedPreferenceManager;
 import mateusz.grabarski.businesslogiclayer.models.Scores;
 import mateusz.grabarski.businesslogiclayer.models.scores.Group;
 import mateusz.grabarski.businesslogiclayer.models.scores.Match;
 import mateusz.grabarski.businesslogiclayer.models.scores.Parameter;
+import mateusz.grabarski.businesslogiclayer.utils.listeners.DataManagerListener;
 import mateusz.grabarski.performprogrammingtest.views.fragments.scores.interfaces.ScoresModel;
+import mateusz.grabarski.performprogrammingtest.views.fragments.scores.interfaces.ScoresPresenter;
 
 /**
  * Created by Mateusz Grabarski on 17.09.2017.
@@ -25,9 +27,12 @@ public class ScoresModelImpl implements ScoresModel {
 
     private Scores scores;
     private Context context;
+    private ScoresManager scoresManager;
+    private ScoresPresenter scoresPresenter;
 
     public ScoresModelImpl(Context context) {
         this.context = context;
+        scoresManager = new ScoresManager(context);
     }
 
     @Override
@@ -41,6 +46,16 @@ public class ScoresModelImpl implements ScoresModel {
             scores = ScoresHandler.parseScores(SharedPreferenceManager.getScoresXML(context));
         }
         return scores;
+    }
+
+    @Override
+    public void setScoresPresenter(ScoresPresenter scoresPresenter) {
+        this.scoresPresenter = scoresPresenter;
+    }
+
+    @Override
+    public ScoresPresenter getScoresPresenter() {
+        return scoresPresenter;
     }
 
     @Override
@@ -67,6 +82,20 @@ public class ScoresModelImpl implements ScoresModel {
 
     @Override
     public void downloadNewData() {
-        Log.d(ScoresModelImpl.class.getSimpleName(), "downloadNewData()");
+        scoresManager.downloadData(new DataManagerListener() {
+            @Override
+            public void onFinishDownloadData(boolean success) {
+                if (success) {
+                    refreshData();
+                    scoresPresenter.displayMatches();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void refreshData() {
+        scores = null;
+        scores = getScores();
     }
 }

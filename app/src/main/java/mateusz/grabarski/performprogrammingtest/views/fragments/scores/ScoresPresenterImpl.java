@@ -42,6 +42,7 @@ public class ScoresPresenterImpl implements ScoresPresenter {
     @Override
     public void setScoresModel(ScoresModel scoresModel) {
         this.scoresModel = scoresModel;
+        this.scoresModel.setScoresPresenter(this);
     }
 
     @Override

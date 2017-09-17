@@ -13,7 +13,10 @@ import mateusz.grabarski.businesslogiclayer.models.scores.Match;
 public interface ScoresModel {
     void setScores(Scores scores);
     Scores getScores();
+    void setScoresPresenter(ScoresPresenter scoresPresenter);
+    ScoresPresenter getScoresPresenter();
     List<Match> getMatchesList();
     String getDate() throws ParseException;
     void downloadNewData();
+    void refreshData();
 }
