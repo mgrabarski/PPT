@@ -5,5 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="windowBackground">#3C3C3C</color>
 
+    <color name="md_color_grey_300">#E0E0E0</color>
+    <color name="md_color_grey_500">#9E9E9E</color>
     <color name="md_color_grey_800">#424242</color>
 </resources>

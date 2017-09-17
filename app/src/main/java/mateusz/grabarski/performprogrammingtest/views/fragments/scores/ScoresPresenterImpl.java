@@ -22,21 +22,27 @@ public class ScoresPresenterImpl implements ScoresPresenter {
 
     @Override
     public void setScoresModel(ScoresModel scoresModel) {
-
+        this.scoresModel = scoresModel;
     }
 
     @Override
     public ScoresModel getScoresModels() {
-        return null;
+        return scoresModel;
     }
 
     @Override
     public void setScoresView(ScoresView scoresView) {
-
+        this.scoresView = scoresView;
     }
 
     @Override
     public ScoresView getScoresView() {
-        return null;
+        return scoresView;
+    }
+
+    @Override
+    public void displayMatches() {
+        scoresView.updateDateHeader(scoresModel.getScores().getGsmrs().getCompetition().getName());
+        scoresView.updateList(scoresModel.getMatchesList());
     }
 }

@@ -49,7 +49,7 @@ public class ScoresFragment extends Fragment implements ScoresView {
         super.onCreate(savedInstanceState);
 
         matches = new ArrayList<>();
-        scoresModel = new ScoresModelImpl();
+        scoresModel = new ScoresModelImpl(getContext());
         scoresPresenter = new ScoresPresenterImpl(getContext());
         scoresPresenter.setScoresModel(scoresModel);
         scoresPresenter.setScoresView(this);
@@ -74,6 +74,7 @@ public class ScoresFragment extends Fragment implements ScoresView {
 
         matchesRv.setLayoutManager(new LinearLayoutManager(getContext()));
         matchesRv.setAdapter(adapter);
+        scoresPresenter.displayMatches();
     }
 
     @Override

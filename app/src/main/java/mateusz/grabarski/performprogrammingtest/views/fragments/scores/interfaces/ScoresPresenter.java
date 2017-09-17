@@ -9,4 +9,5 @@ public interface ScoresPresenter {
     ScoresModel getScoresModels();
     void setScoresView(ScoresView scoresView);
     ScoresView getScoresView();
+    void displayMatches();
 }

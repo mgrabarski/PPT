@@ -1,6 +1,9 @@
 package mateusz.grabarski.performprogrammingtest.views.fragments.scores.interfaces;
 
+import java.util.List;
+
 import mateusz.grabarski.businesslogiclayer.models.Scores;
+import mateusz.grabarski.businesslogiclayer.models.scores.Match;
 
 /**
  * Created by Mateusz Grabarski on 17.09.2017.
@@ -9,4 +12,5 @@ import mateusz.grabarski.businesslogiclayer.models.Scores;
 public interface ScoresModel {
     void setScores(Scores scores);
     Scores getScores();
+    List<Match> getMatchesList();
 }
