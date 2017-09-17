@@ -47,6 +47,14 @@ public class Method {
         this.methodId = methodId;
     }
 
+    public String getParameterByName(String name) {
+        for (Parameter param : parameter)
+            if (param.getName().equals(name))
+                return param.getValue();
+
+        return null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

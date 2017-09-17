@@ -6,6 +6,14 @@ package mateusz.grabarski.businesslogiclayer.models.scores;
 
 public class Parameter {
 
+    public static final String PARAMETER_DATE = "date";
+    public static final String PARAMETER_DETAILED = "detailed";
+    public static final String PARAMETER_ID = "id";
+    public static final String PARAMETER_LANG = "lang";
+    public static final String PARAMETER_MINUTES = "minutes";
+    public static final String PARAMETER_NOW_PLAYING = "now_playing";
+    public static final String PARAMETER_TYPE = "type";
+
     private String name;
     private String value;
 

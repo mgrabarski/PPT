@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements
 
         if (!fragmentPopped && fragmentManager.findFragmentByTag(tag) == null) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.activity_main_fl, fragment, tag);
+            fragmentTransaction.replace(R.id.activity_main_fl, fragment, tag);
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             fragmentTransaction.addToBackStack(tag);
             fragmentTransaction.commit();
