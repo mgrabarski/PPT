@@ -86,6 +86,8 @@ public class StandingsAdapter extends RecyclerView.Adapter<StandingsAdapter.View
                 previousRankIv.setImageResource(R.drawable.ic_arrow_upward);
             else if (ranking.getRank() > ranking.getLastRank())
                 previousRankIv.setImageResource(R.drawable.ic_arrow_downward);
+            else
+                previousRankIv.setImageResource(android.R.color.transparent);
         }
     }
 }
