@@ -6,25 +6,25 @@ package mateusz.grabarski.businesslogiclayer.models.standings;
 
 public class Ranking {
 
-    private String matchesTotal;
-    private String matchesDraw;
-    private String areaId;
+    private int matchesTotal;
+    private int matchesDraw;
+    private long areaId;
     private String countryCode;
-    private String matchesLost;
+    private int matchesLost;
     private String lastRank;
-    private String matchesWon;
-    private String rank;
+    private int matchesWon;
+    private int rank;
     private String goalsAgainst;
     private String clubName;
     private String zoneStart;
-    private String goalsPro;
-    private String points;
-    private String teamId;
+    private int goalsPro;
+    private int points;
+    private long teamId;
 
     public Ranking() {
     }
 
-    public Ranking(String matchesTotal, String matchesDraw, String areaId, String countryCode, String matchesLost, String lastRank, String matchesWon, String rank, String goalsAgainst, String clubName, String zoneStart, String goalsPro, String points, String teamId) {
+    public Ranking(int matchesTotal, int matchesDraw, long areaId, String countryCode, int matchesLost, String lastRank, int matchesWon, int rank, String goalsAgainst, String clubName, String zoneStart, int goalsPro, int points, long teamId) {
         this.matchesTotal = matchesTotal;
         this.matchesDraw = matchesDraw;
         this.areaId = areaId;
@@ -41,27 +41,27 @@ public class Ranking {
         this.teamId = teamId;
     }
 
-    public String getMatchesTotal() {
+    public int getMatchesTotal() {
         return matchesTotal;
     }
 
-    public void setMatchesTotal(String matchesTotal) {
+    public void setMatchesTotal(int matchesTotal) {
         this.matchesTotal = matchesTotal;
     }
 
-    public String getMatchesDraw() {
+    public int getMatchesDraw() {
         return matchesDraw;
     }
 
-    public void setMatchesDraw(String matchesDraw) {
+    public void setMatchesDraw(int matchesDraw) {
         this.matchesDraw = matchesDraw;
     }
 
-    public String getAreaId() {
+    public long getAreaId() {
         return areaId;
     }
 
-    public void setAreaId(String areaId) {
+    public void setAreaId(long areaId) {
         this.areaId = areaId;
     }
 
@@ -73,11 +73,11 @@ public class Ranking {
         this.countryCode = countryCode;
     }
 
-    public String getMatchesLost() {
+    public int getMatchesLost() {
         return matchesLost;
     }
 
-    public void setMatchesLost(String matchesLost) {
+    public void setMatchesLost(int matchesLost) {
         this.matchesLost = matchesLost;
     }
 
@@ -89,19 +89,19 @@ public class Ranking {
         this.lastRank = lastRank;
     }
 
-    public String getMatchesWon() {
+    public int getMatchesWon() {
         return matchesWon;
     }
 
-    public void setMatchesWon(String matchesWon) {
+    public void setMatchesWon(int matchesWon) {
         this.matchesWon = matchesWon;
     }
 
-    public String getRank() {
+    public int getRank() {
         return rank;
     }
 
-    public void setRank(String rank) {
+    public void setRank(int rank) {
         this.rank = rank;
     }
 
@@ -129,27 +129,27 @@ public class Ranking {
         this.zoneStart = zoneStart;
     }
 
-    public String getGoalsPro() {
+    public int getGoalsPro() {
         return goalsPro;
     }
 
-    public void setGoalsPro(String goalsPro) {
+    public void setGoalsPro(int goalsPro) {
         this.goalsPro = goalsPro;
     }
 
-    public String getPoints() {
+    public int getPoints() {
         return points;
     }
 
-    public void setPoints(String points) {
+    public void setPoints(int points) {
         this.points = points;
     }
 
-    public String getTeamId() {
+    public long getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(String teamId) {
+    public void setTeamId(long teamId) {
         this.teamId = teamId;
     }
 
@@ -160,52 +160,43 @@ public class Ranking {
 
         Ranking ranking = (Ranking) o;
 
-        if (getMatchesTotal() != null ? !getMatchesTotal().equals(ranking.getMatchesTotal()) : ranking.getMatchesTotal() != null)
-            return false;
-        if (getMatchesDraw() != null ? !getMatchesDraw().equals(ranking.getMatchesDraw()) : ranking.getMatchesDraw() != null)
-            return false;
-        if (getAreaId() != null ? !getAreaId().equals(ranking.getAreaId()) : ranking.getAreaId() != null)
-            return false;
+        if (getMatchesTotal() != ranking.getMatchesTotal()) return false;
+        if (getMatchesDraw() != ranking.getMatchesDraw()) return false;
+        if (getAreaId() != ranking.getAreaId()) return false;
+        if (getMatchesLost() != ranking.getMatchesLost()) return false;
+        if (getMatchesWon() != ranking.getMatchesWon()) return false;
+        if (getRank() != ranking.getRank()) return false;
+        if (getGoalsPro() != ranking.getGoalsPro()) return false;
+        if (getPoints() != ranking.getPoints()) return false;
+        if (getTeamId() != ranking.getTeamId()) return false;
         if (getCountryCode() != null ? !getCountryCode().equals(ranking.getCountryCode()) : ranking.getCountryCode() != null)
             return false;
-        if (getMatchesLost() != null ? !getMatchesLost().equals(ranking.getMatchesLost()) : ranking.getMatchesLost() != null)
-            return false;
         if (getLastRank() != null ? !getLastRank().equals(ranking.getLastRank()) : ranking.getLastRank() != null)
-            return false;
-        if (getMatchesWon() != null ? !getMatchesWon().equals(ranking.getMatchesWon()) : ranking.getMatchesWon() != null)
-            return false;
-        if (getRank() != null ? !getRank().equals(ranking.getRank()) : ranking.getRank() != null)
             return false;
         if (getGoalsAgainst() != null ? !getGoalsAgainst().equals(ranking.getGoalsAgainst()) : ranking.getGoalsAgainst() != null)
             return false;
         if (getClubName() != null ? !getClubName().equals(ranking.getClubName()) : ranking.getClubName() != null)
             return false;
-        if (getZoneStart() != null ? !getZoneStart().equals(ranking.getZoneStart()) : ranking.getZoneStart() != null)
-            return false;
-        if (getGoalsPro() != null ? !getGoalsPro().equals(ranking.getGoalsPro()) : ranking.getGoalsPro() != null)
-            return false;
-        if (getPoints() != null ? !getPoints().equals(ranking.getPoints()) : ranking.getPoints() != null)
-            return false;
-        return getTeamId() != null ? getTeamId().equals(ranking.getTeamId()) : ranking.getTeamId() == null;
+        return getZoneStart() != null ? getZoneStart().equals(ranking.getZoneStart()) : ranking.getZoneStart() == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = getMatchesTotal() != null ? getMatchesTotal().hashCode() : 0;
-        result = 31 * result + (getMatchesDraw() != null ? getMatchesDraw().hashCode() : 0);
-        result = 31 * result + (getAreaId() != null ? getAreaId().hashCode() : 0);
+        int result = getMatchesTotal();
+        result = 31 * result + getMatchesDraw();
+        result = 31 * result + (int) (getAreaId() ^ (getAreaId() >>> 32));
         result = 31 * result + (getCountryCode() != null ? getCountryCode().hashCode() : 0);
-        result = 31 * result + (getMatchesLost() != null ? getMatchesLost().hashCode() : 0);
+        result = 31 * result + getMatchesLost();
         result = 31 * result + (getLastRank() != null ? getLastRank().hashCode() : 0);
-        result = 31 * result + (getMatchesWon() != null ? getMatchesWon().hashCode() : 0);
-        result = 31 * result + (getRank() != null ? getRank().hashCode() : 0);
+        result = 31 * result + getMatchesWon();
+        result = 31 * result + getRank();
         result = 31 * result + (getGoalsAgainst() != null ? getGoalsAgainst().hashCode() : 0);
         result = 31 * result + (getClubName() != null ? getClubName().hashCode() : 0);
         result = 31 * result + (getZoneStart() != null ? getZoneStart().hashCode() : 0);
-        result = 31 * result + (getGoalsPro() != null ? getGoalsPro().hashCode() : 0);
-        result = 31 * result + (getPoints() != null ? getPoints().hashCode() : 0);
-        result = 31 * result + (getTeamId() != null ? getTeamId().hashCode() : 0);
+        result = 31 * result + getGoalsPro();
+        result = 31 * result + getPoints();
+        result = 31 * result + (int) (getTeamId() ^ (getTeamId() >>> 32));
         return result;
     }
 
