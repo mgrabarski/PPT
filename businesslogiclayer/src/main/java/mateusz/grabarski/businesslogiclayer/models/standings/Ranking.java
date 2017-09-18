@@ -11,7 +11,7 @@ public class Ranking {
     private long areaId;
     private String countryCode;
     private int matchesLost;
-    private String lastRank;
+    private int lastRank;
     private int matchesWon;
     private int rank;
     private String goalsAgainst;
@@ -24,7 +24,7 @@ public class Ranking {
     public Ranking() {
     }
 
-    public Ranking(int matchesTotal, int matchesDraw, long areaId, String countryCode, int matchesLost, String lastRank, int matchesWon, int rank, String goalsAgainst, String clubName, String zoneStart, int goalsPro, int points, long teamId) {
+    public Ranking(int matchesTotal, int matchesDraw, long areaId, String countryCode, int matchesLost, int lastRank, int matchesWon, int rank, String goalsAgainst, String clubName, String zoneStart, int goalsPro, int points, long teamId) {
         this.matchesTotal = matchesTotal;
         this.matchesDraw = matchesDraw;
         this.areaId = areaId;
@@ -81,11 +81,11 @@ public class Ranking {
         this.matchesLost = matchesLost;
     }
 
-    public String getLastRank() {
+    public int getLastRank() {
         return lastRank;
     }
 
-    public void setLastRank(String lastRank) {
+    public void setLastRank(int lastRank) {
         this.lastRank = lastRank;
     }
 
@@ -164,14 +164,13 @@ public class Ranking {
         if (getMatchesDraw() != ranking.getMatchesDraw()) return false;
         if (getAreaId() != ranking.getAreaId()) return false;
         if (getMatchesLost() != ranking.getMatchesLost()) return false;
+        if (getLastRank() != ranking.getLastRank()) return false;
         if (getMatchesWon() != ranking.getMatchesWon()) return false;
         if (getRank() != ranking.getRank()) return false;
         if (getGoalsPro() != ranking.getGoalsPro()) return false;
         if (getPoints() != ranking.getPoints()) return false;
         if (getTeamId() != ranking.getTeamId()) return false;
         if (getCountryCode() != null ? !getCountryCode().equals(ranking.getCountryCode()) : ranking.getCountryCode() != null)
-            return false;
-        if (getLastRank() != null ? !getLastRank().equals(ranking.getLastRank()) : ranking.getLastRank() != null)
             return false;
         if (getGoalsAgainst() != null ? !getGoalsAgainst().equals(ranking.getGoalsAgainst()) : ranking.getGoalsAgainst() != null)
             return false;
@@ -188,7 +187,7 @@ public class Ranking {
         result = 31 * result + (int) (getAreaId() ^ (getAreaId() >>> 32));
         result = 31 * result + (getCountryCode() != null ? getCountryCode().hashCode() : 0);
         result = 31 * result + getMatchesLost();
-        result = 31 * result + (getLastRank() != null ? getLastRank().hashCode() : 0);
+        result = 31 * result + getLastRank();
         result = 31 * result + getMatchesWon();
         result = 31 * result + getRank();
         result = 31 * result + (getGoalsAgainst() != null ? getGoalsAgainst().hashCode() : 0);
