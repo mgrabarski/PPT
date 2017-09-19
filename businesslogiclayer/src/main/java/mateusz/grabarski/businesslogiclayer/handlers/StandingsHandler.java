@@ -271,20 +271,20 @@ public class StandingsHandler {
                 if (name.equals(KEY_RANKING)) {
                     Ranking ranking = new Ranking();
 
-                    ranking.setRank(child.getAttribute(KEY_RANKING_RANK));
-                    ranking.setLastRank(child.getAttribute(KEY_RANKING_LAST_RANK));
+                    ranking.setRank(Integer.parseInt(child.getAttribute(KEY_RANKING_RANK)));
+                    ranking.setLastRank(Integer.parseInt(child.getAttribute(KEY_RANKING_LAST_RANK)));
                     ranking.setZoneStart(child.getAttribute(KEY_RANKING_ZONE_START));
-                    ranking.setTeamId(child.getAttribute(KEY_RANKING_TEAM_ID));
+                    ranking.setTeamId(Long.parseLong(child.getAttribute(KEY_RANKING_TEAM_ID)));
                     ranking.setClubName(child.getAttribute(KEY_RANKING_CLUB_NAME));
                     ranking.setCountryCode(child.getAttribute(KEY_RANKING_COUNTRY_CODE));
-                    ranking.setAreaId(child.getAttribute(KEY_RANKING_AREA_ID));
-                    ranking.setMatchesTotal(child.getAttribute(KEY_RANKING_MATCHES_TOTAL));
-                    ranking.setMatchesWon(child.getAttribute(KEY_RANKING_MATCHES_WON));
-                    ranking.setMatchesDraw(child.getAttribute(KEY_RANKING_MATCHES_DRAW));
-                    ranking.setMatchesLost(child.getAttribute(KEY_RANKING_MATCHES_LOST));
-                    ranking.setGoalsPro(child.getAttribute(KEY_RANKING_GOALS_PRO));
+                    ranking.setAreaId(Long.parseLong(child.getAttribute(KEY_RANKING_AREA_ID)));
+                    ranking.setMatchesTotal(Integer.parseInt(child.getAttribute(KEY_RANKING_MATCHES_TOTAL)));
+                    ranking.setMatchesWon(Integer.parseInt(child.getAttribute(KEY_RANKING_MATCHES_WON)));
+                    ranking.setMatchesDraw(Integer.parseInt(child.getAttribute(KEY_RANKING_MATCHES_DRAW)));
+                    ranking.setMatchesLost(Integer.parseInt(child.getAttribute(KEY_RANKING_MATCHES_LOST)));
+                    ranking.setGoalsPro(Integer.parseInt(child.getAttribute(KEY_RANKING_GOALS_PRO)));
                     ranking.setGoalsAgainst(child.getAttribute(KEY_RANKING_GOALS_AGAINST));
-                    ranking.setPoints(child.getAttribute(KEY_RANKING_POINTS));
+                    ranking.setPoints(Integer.parseInt(child.getAttribute(KEY_RANKING_POINTS)));
 
                     rankings.add(ranking);
                 }

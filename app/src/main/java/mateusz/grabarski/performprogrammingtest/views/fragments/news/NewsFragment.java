@@ -65,16 +65,17 @@ public class NewsFragment extends Fragment implements OnNewsClickListener {
 
         News news = NewsHandler.parseNews(SharedPreferenceManager.getNewsXML(getContext()));
 
+        newsRv.setLayoutManager(new LinearLayoutManager(getContext()));
+
         if (news == null) {
             newsRv.setVisibility(View.GONE);
             noDataTv.setVisibility(View.VISIBLE);
         } else {
             newsRv.setVisibility(View.VISIBLE);
             noDataTv.setVisibility(View.GONE);
-        }
 
-        newsRv.setLayoutManager(new LinearLayoutManager(getContext()));
-        newsRv.setAdapter(new NewsAdapter(getContext(), news.getRss().getChannel().getItem(), this));
+            newsRv.setAdapter(new NewsAdapter(getContext(), news.getRss().getChannel().getItem(), this));
+        }
     }
 
     @Override

@@ -11,4 +11,6 @@ import mateusz.grabarski.businesslogiclayer.models.scores.Match;
 public interface ScoresView {
     void updateList(List<Match> matches);
     void updateDateHeader(String header);
+    void showNoDataView();
+    void showDataViews();
 }

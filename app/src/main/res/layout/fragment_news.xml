@@ -11,8 +11,10 @@
 
     <TextView
         android:id="@+id/fragment_news_no_data_tv"
-        android:text="@string/no_data_for_display"
-        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/no_data_for_display"
+        android:textColor="@android:color/white"
+        android:textSize="24sp" />
 </RelativeLayout>
