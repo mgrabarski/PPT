@@ -27,7 +27,17 @@ public class MainActivity extends AppCompatActivity implements
         dropDownMenu = (DropDownMenu) findViewById(R.id.activity_main_drop_down_menu);
         dropDownMenu.setListener(this);
 
-        replaceAndAddToBackStackFragment(NewsFragment.newInstance());
+        if (savedInstanceState == null)
+            replaceAndAddToBackStackFragment(NewsFragment.newInstance());
+        else
+            replaceAndAddToBackStackFragment(getLastFragment());
+    }
+
+    private Fragment getLastFragment() {
+        int index = getSupportFragmentManager().getBackStackEntryCount() - 1;
+        FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
+        String tag = backEntry.getName();
+        return getSupportFragmentManager().findFragmentByTag(tag);
     }
 
     @Override
