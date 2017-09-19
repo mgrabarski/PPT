@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,6 +17,7 @@ import java.util.List;
 import mateusz.grabarski.businesslogiclayer.comparators.RankingComparator;
 import mateusz.grabarski.businesslogiclayer.handlers.StandingsHandler;
 import mateusz.grabarski.businesslogiclayer.managers.SharedPreferenceManager;
+import mateusz.grabarski.businesslogiclayer.models.Standings;
 import mateusz.grabarski.businesslogiclayer.models.standings.Ranking;
 import mateusz.grabarski.performprogrammingtest.R;
 import mateusz.grabarski.performprogrammingtest.views.fragments.standings.adapter.StandingsAdapter;
@@ -27,6 +29,7 @@ import mateusz.grabarski.performprogrammingtest.views.fragments.standings.adapte
 public class StandingsFragment extends Fragment {
 
     private RecyclerView standingsRv;
+    private TextView noDataTv;
 
     private List<Ranking> rankings;
     private StandingsAdapter adapter;
@@ -53,6 +56,7 @@ public class StandingsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_standings, container, false);
 
         standingsRv = view.findViewById(R.id.fragment_standings_rv);
+        noDataTv = view.findViewById(R.id.fragment_standings_no_data_tv);
 
         adapter = new StandingsAdapter(getContext(), rankings);
 
@@ -65,13 +69,27 @@ public class StandingsFragment extends Fragment {
 
         standingsRv.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        rankings.addAll(getOrderRankingItems());
+        List<Ranking> rankings = getOrderRankingItems();
 
-        standingsRv.setAdapter(adapter);
+        if (rankings == null) {
+            noDataTv.setVisibility(View.VISIBLE);
+            standingsRv.setVisibility(View.GONE);
+        } else {
+            noDataTv.setVisibility(View.GONE);
+            standingsRv.setVisibility(View.VISIBLE);
+
+            rankings.addAll(getOrderRankingItems());
+
+            standingsRv.setAdapter(adapter);
+        }
     }
 
     private List<Ranking> getOrderRankingItems() {
-        List<Ranking> rankings = StandingsHandler.parseStanding(SharedPreferenceManager.getStandingsXML(getContext())).getRoot().getCompetition().getSeason().getRound().getResultStable().getRanking();
+        Standings standings = StandingsHandler.parseStanding(SharedPreferenceManager.getStandingsXML(getContext()));
+
+        if (standings == null) return null;
+
+        List<Ranking> rankings = standings.getRoot().getCompetition().getSeason().getRound().getResultStable().getRanking();
 
         Collections.sort(rankings, RankingComparator.comparatorByRank());
 

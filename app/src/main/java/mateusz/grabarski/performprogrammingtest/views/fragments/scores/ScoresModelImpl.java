@@ -60,6 +60,8 @@ public class ScoresModelImpl implements ScoresModel {
 
     @Override
     public List<Match> getMatchesList() {
+        if (checkScores()) return null;
+
         List<Match> matches = new ArrayList<>();
 
         for (Group group : getScores().getGsmrs().getCompetition().getSeason().getRound().getGroup())
@@ -70,6 +72,9 @@ public class ScoresModelImpl implements ScoresModel {
 
     @Override
     public String getDate() throws ParseException {
+
+        if (checkScores()) return null;
+
         String date = getScores().getGsmrs().getMethod().getParameterByName(Parameter.PARAMETER_DATE);
 
         SimpleDateFormat currentFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -97,5 +102,9 @@ public class ScoresModelImpl implements ScoresModel {
     public void refreshData() {
         scores = null;
         scores = getScores();
+    }
+
+    private boolean checkScores() {
+        return getScores() == null;
     }
 }

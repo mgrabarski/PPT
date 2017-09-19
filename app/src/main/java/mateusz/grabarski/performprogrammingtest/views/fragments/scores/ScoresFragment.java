@@ -26,7 +26,7 @@ import mateusz.grabarski.performprogrammingtest.views.fragments.scores.interface
 
 public class ScoresFragment extends Fragment implements ScoresView {
 
-    private TextView headerTv;
+    private TextView headerTv, noDataTv;
     private RecyclerView matchesRv;
 
     private ScoresPresenter scoresPresenter;
@@ -62,6 +62,7 @@ public class ScoresFragment extends Fragment implements ScoresView {
 
         headerTv = view.findViewById(R.id.fragment_scores_header_tv);
         matchesRv = view.findViewById(R.id.fragment_scores_list_rv);
+        noDataTv = view.findViewById(R.id.fragment_scores_no_data_tv);
 
         adapter = new MatchesAdapter(getContext(), matches);
 
@@ -86,13 +87,33 @@ public class ScoresFragment extends Fragment implements ScoresView {
 
     @Override
     public void updateList(List<Match> matches) {
-        this.matches.clear();
-        this.matches.addAll(matches);
-        adapter.notifyDataSetChanged();
+        if (matches == null)  {
+            showNoDataView();
+        } else {
+            showNoDataView();
+
+            this.matches.clear();
+            this.matches.addAll(matches);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
     public void updateDateHeader(String header) {
         headerTv.setText(header);
+    }
+
+    @Override
+    public void showNoDataView() {
+        headerTv.setVisibility(View.GONE);
+        matchesRv.setVisibility(View.GONE);
+        noDataTv.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showDataViews() {
+        headerTv.setVisibility(View.VISIBLE);
+        matchesRv.setVisibility(View.VISIBLE);
+        noDataTv.setVisibility(View.GONE);
     }
 }

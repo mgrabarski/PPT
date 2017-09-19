@@ -5,6 +5,15 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/fragment_scores_no_data_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/no_data_for_display"
+        android:textColor="@android:color/white"
+        android:textSize="24sp" />
+
+    <TextView
         android:id="@+id/fragment_scores_header_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

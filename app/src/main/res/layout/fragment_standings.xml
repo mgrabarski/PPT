@@ -10,4 +10,13 @@
         android:id="@+id/fragment_standings_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/fragment_standings_no_data_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/no_data_for_display"
+        android:textColor="@android:color/white"
+        android:textSize="24sp" />
 </LinearLayout>
