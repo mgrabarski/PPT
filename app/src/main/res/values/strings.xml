@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">PerformProgrammingTest</string>
+    <string name="app_name">Perform Programming Test</string>
+    <string name="news">News</string>
+    <string name="scores">Scores</string>
+    <string name="standings">Standings</string>
+    <string name="no_data_for_display">No data for display</string>
+    <string name="club">Club</string>
+    <string name="p">P</string>
+    <string name="w">W</string>
+    <string name="d">D</string>
+    <string name="l">L</string>
+    <string name="gd">GD</string>
+    <string name="pts">Pts</string>
 </resources>

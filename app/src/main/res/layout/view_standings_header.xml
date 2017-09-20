@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/md_color_grey_600"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"
+    tools:showIn="@layout/fragment_standings">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:text="@string/club"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        style="@style/TableHeaderItem"
+        android:text="@string/p" />
+
+    <TextView
+        style="@style/TableHeaderItem"
+        android:text="@string/w" />
+
+    <TextView
+        style="@style/TableHeaderItem"
+        android:text="@string/d" />
+
+    <TextView
+        style="@style/TableHeaderItem"
+        android:text="@string/l" />
+
+    <TextView
+        style="@style/TableHeaderItem"
+        android:text="@string/gd" />
+
+    <TextView
+        style="@style/TableHeaderItem"
+        android:text="@string/pts" />
+
+    <android.support.v4.widget.Space
+        android:layout_width="@dimen/table_item_width"
+        android:layout_height="match_parent" />
+</LinearLayout>
