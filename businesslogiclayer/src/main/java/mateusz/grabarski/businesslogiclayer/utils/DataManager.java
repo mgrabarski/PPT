@@ -36,6 +36,12 @@ public class DataManager {
     }
 
     private void downloadData() {
+
+        if (!NetworkConnectionUtils.isNetworkConnectionAvailable(context)) {
+            listener.onFinishDownloadData(false);
+            return;
+        }
+
         newsManager.downloadData(new DataManagerListener() {
             @Override
             public void onFinishDownloadData(boolean success) {

@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import mateusz.grabarski.businesslogiclayer.utils.NetworkConnectionUtils;
 import mateusz.grabarski.performprogrammingtest.views.fragments.scores.interfaces.ScoresModel;
 import mateusz.grabarski.performprogrammingtest.views.fragments.scores.interfaces.ScoresPresenter;
 import mateusz.grabarski.performprogrammingtest.views.fragments.scores.interfaces.ScoresView;
@@ -26,7 +27,7 @@ public class ScoresPresenterImpl implements ScoresPresenter {
     private Timer refreshTimer;
     private Runnable task;
 
-    public ScoresPresenterImpl(Context context) {
+    public ScoresPresenterImpl(final Context context) {
         this.context = context;
 
         refreshTask = new RefreshTask();
@@ -34,7 +35,8 @@ public class ScoresPresenterImpl implements ScoresPresenter {
         task = new Runnable() {
             @Override
             public void run() {
-                scoresModel.downloadNewData();
+                if (NetworkConnectionUtils.isNetworkConnectionAvailable(context))
+                    scoresModel.downloadNewData();
             }
         };
     }

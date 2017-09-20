@@ -43,7 +43,10 @@ public class ScoresModelImpl implements ScoresModel {
     @Override
     public Scores getScores() {
         if (scores == null) {
-            scores = ScoresHandler.parseScores(SharedPreferenceManager.getScoresXML(context));
+            if (SharedPreferenceManager.getScoresXML(context) == null ||
+                    SharedPreferenceManager.getScoresXML(context).equals(""))
+                return null;
+            else scores = ScoresHandler.parseScores(SharedPreferenceManager.getScoresXML(context));
         }
         return scores;
     }

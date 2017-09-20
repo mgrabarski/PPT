@@ -15,6 +15,7 @@ import java.util.List;
 
 import mateusz.grabarski.businesslogiclayer.models.scores.Match;
 import mateusz.grabarski.performprogrammingtest.R;
+import mateusz.grabarski.performprogrammingtest.views.fragments.interfaces.FragmentConnectionListener;
 import mateusz.grabarski.performprogrammingtest.views.fragments.scores.adapter.MatchesAdapter;
 import mateusz.grabarski.performprogrammingtest.views.fragments.scores.interfaces.ScoresModel;
 import mateusz.grabarski.performprogrammingtest.views.fragments.scores.interfaces.ScoresPresenter;
@@ -24,7 +25,7 @@ import mateusz.grabarski.performprogrammingtest.views.fragments.scores.interface
  * Created by Mateusz Grabarski on 15.09.2017.
  */
 
-public class ScoresFragment extends Fragment implements ScoresView {
+public class ScoresFragment extends Fragment implements ScoresView, FragmentConnectionListener {
 
     private TextView headerTv, noDataTv;
     private RecyclerView matchesRv;
@@ -90,7 +91,7 @@ public class ScoresFragment extends Fragment implements ScoresView {
         if (matches == null)  {
             showNoDataView();
         } else {
-            showNoDataView();
+            showDataViews();
 
             this.matches.clear();
             this.matches.addAll(matches);
@@ -115,5 +116,10 @@ public class ScoresFragment extends Fragment implements ScoresView {
         headerTv.setVisibility(View.VISIBLE);
         matchesRv.setVisibility(View.VISIBLE);
         noDataTv.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void updateView() {
+        scoresPresenter.displayMatches();
     }
 }

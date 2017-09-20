@@ -20,13 +20,14 @@ import mateusz.grabarski.businesslogiclayer.managers.SharedPreferenceManager;
 import mateusz.grabarski.businesslogiclayer.models.Standings;
 import mateusz.grabarski.businesslogiclayer.models.standings.Ranking;
 import mateusz.grabarski.performprogrammingtest.R;
+import mateusz.grabarski.performprogrammingtest.views.fragments.interfaces.FragmentConnectionListener;
 import mateusz.grabarski.performprogrammingtest.views.fragments.standings.adapter.StandingsAdapter;
 
 /**
  * Created by Mateusz Grabarski on 15.09.2017.
  */
 
-public class StandingsFragment extends Fragment {
+public class StandingsFragment extends Fragment implements FragmentConnectionListener {
 
     private RecyclerView standingsRv;
     private TextView noDataTv;
@@ -67,21 +68,7 @@ public class StandingsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        standingsRv.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        List<Ranking> rankings = getOrderRankingItems();
-
-        if (rankings == null) {
-            noDataTv.setVisibility(View.VISIBLE);
-            standingsRv.setVisibility(View.GONE);
-        } else {
-            noDataTv.setVisibility(View.GONE);
-            standingsRv.setVisibility(View.VISIBLE);
-
-            rankings.addAll(getOrderRankingItems());
-
-            standingsRv.setAdapter(adapter);
-        }
+        updateView();
     }
 
     private List<Ranking> getOrderRankingItems() {
@@ -94,5 +81,23 @@ public class StandingsFragment extends Fragment {
         Collections.sort(rankings, RankingComparator.comparatorByRank());
 
         return rankings;
+    }
+
+    @Override
+    public void updateView() {
+
+        if (SharedPreferenceManager.getStandingsXML(getContext()) == null || SharedPreferenceManager.getStandingsXML(getContext()).equals("")) {
+            noDataTv.setVisibility(View.VISIBLE);
+            standingsRv.setVisibility(View.GONE);
+        } else {
+            standingsRv.setLayoutManager(new LinearLayoutManager(getContext()));
+
+            noDataTv.setVisibility(View.GONE);
+            standingsRv.setVisibility(View.VISIBLE);
+
+            this.rankings.addAll(getOrderRankingItems());
+
+            standingsRv.setAdapter(adapter);
+        }
     }
 }

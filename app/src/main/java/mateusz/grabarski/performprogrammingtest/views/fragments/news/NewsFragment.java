@@ -16,6 +16,7 @@ import mateusz.grabarski.businesslogiclayer.managers.SharedPreferenceManager;
 import mateusz.grabarski.businesslogiclayer.models.News;
 import mateusz.grabarski.businesslogiclayer.models.news.Item;
 import mateusz.grabarski.performprogrammingtest.R;
+import mateusz.grabarski.performprogrammingtest.views.fragments.interfaces.FragmentConnectionListener;
 import mateusz.grabarski.performprogrammingtest.views.fragments.news.adapter.NewsAdapter;
 import mateusz.grabarski.performprogrammingtest.views.fragments.news.adapter.listeners.OnNewsClickListener;
 
@@ -23,7 +24,7 @@ import mateusz.grabarski.performprogrammingtest.views.fragments.news.adapter.lis
  * Created by Mateusz Grabarski on 15.09.2017.
  */
 
-public class NewsFragment extends Fragment implements OnNewsClickListener {
+public class NewsFragment extends Fragment implements OnNewsClickListener, FragmentConnectionListener {
 
     private RecyclerView newsRv;
     private TextView noDataTv;
@@ -63,24 +64,28 @@ public class NewsFragment extends Fragment implements OnNewsClickListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        News news = NewsHandler.parseNews(SharedPreferenceManager.getNewsXML(getContext()));
-
-        newsRv.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        if (news == null) {
-            newsRv.setVisibility(View.GONE);
-            noDataTv.setVisibility(View.VISIBLE);
-        } else {
-            newsRv.setVisibility(View.VISIBLE);
-            noDataTv.setVisibility(View.GONE);
-
-            newsRv.setAdapter(new NewsAdapter(getContext(), news.getRss().getChannel().getItem(), this));
-        }
+        updateView();
     }
 
     @Override
     public void onNewsItemClick(Item item) {
         listener.onNewsItemClick(item);
+    }
+
+    @Override
+    public void updateView() {
+        if (SharedPreferenceManager.getNewsXML(getContext()) == null || SharedPreferenceManager.getNewsXML(getContext()).equals("")) {
+            newsRv.setVisibility(View.GONE);
+            noDataTv.setVisibility(View.VISIBLE);
+        } else {
+            News news = NewsHandler.parseNews(SharedPreferenceManager.getNewsXML(getContext()));
+
+            newsRv.setLayoutManager(new LinearLayoutManager(getContext()));
+            newsRv.setAdapter(new NewsAdapter(getContext(), news.getRss().getChannel().getItem(), this));
+
+            newsRv.setVisibility(View.VISIBLE);
+            noDataTv.setVisibility(View.GONE);
+        }
     }
 
     public interface NewsFragmentInterface extends OnNewsClickListener {
